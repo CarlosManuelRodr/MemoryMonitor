@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     30895,        690]
-NotebookOptionsPosition[     30367,        670]
-NotebookOutlinePosition[     30703,        685]
-CellTagsIndexPosition[     30660,        682]
+NotebookDataLength[     31222,        691]
+NotebookOptionsPosition[     30701,        674]
+NotebookOutlinePosition[     31050,        689]
+CellTagsIndexPosition[     31007,        686]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -23,8 +23,8 @@ Cell[CellGroupData[{
 Cell["Memory monitor", "Title",
  CellChangeTimes->{{3.704924048958434*^9, 3.704924059237949*^9}, {
   3.704924163877811*^9, 
-  3.704924165829454*^9}},ExpressionUUID->"6d35e3b2-a1fd-4f48-b8e4-\
-9ff9e2cb483e"],
+  3.704924165829454*^9}},ExpressionUUID->"284c274b-1cb0-4292-95c3-\
+bfc2bc18d2ad"],
 
 Cell["\<\
 Based on:
@@ -34,8 +34,8 @@ https://mathematica.stackexchange.com/a/9753\
 \>", "Text",
  CellChangeTimes->{{3.704924238516616*^9, 3.704924262354478*^9}, {
   3.704926409034086*^9, 
-  3.7049264122243443`*^9}},ExpressionUUID->"caf1b4e6-7fa7-47f7-ac4d-\
-0e16443ca507"],
+  3.7049264122243443`*^9}},ExpressionUUID->"c36d8067-bb0e-4784-a650-\
+b84676ea3703"],
 
 Cell[BoxData[{
  RowBox[{
@@ -95,48 +95,47 @@ Cell[BoxData[{
       "\[IndentingNewLine]", 
       RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
        RowBox[{
-        RowBox[{"currentMemory", " ", "=", " ", 
-         RowBox[{"UsedMemoryFunction", "[", "initialMemory", "]"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"Panel", "[", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"Row", "[", "\[IndentingNewLine]", 
-           RowBox[{"{", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{"HorizontalGauge", "[", "\[IndentingNewLine]", 
-              RowBox[{"currentMemory", ",", "\[IndentingNewLine]", 
-               RowBox[{"{", 
-                RowBox[{"0", ",", "100"}], "}"}], ",", "\[IndentingNewLine]", 
-               
-               RowBox[{"ScaleRanges", "\[Rule]", 
+        RowBox[{
+         RowBox[{"currentMemory", " ", "=", " ", 
+          RowBox[{"UsedMemoryFunction", "[", "initialMemory", "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Row", "[", "\[IndentingNewLine]", 
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"HorizontalGauge", "[", "\[IndentingNewLine]", 
+               RowBox[{"currentMemory", ",", "\[IndentingNewLine]", 
                 RowBox[{"{", 
-                 RowBox[{
-                  RowBox[{"{", 
-                   RowBox[{"50", ",", "60"}], "}"}], ",", 
-                  RowBox[{"{", 
-                   RowBox[{"60", ",", "70"}], "}"}], ",", 
-                  RowBox[{"{", 
-                   RowBox[{"70", ",", "80"}], "}"}], ",", 
-                  RowBox[{"{", 
-                   RowBox[{"80", ",", "100"}], "}"}]}], "}"}]}], ",", 
-               "\[IndentingNewLine]", 
-               RowBox[{"GaugeFrameStyle", "\[Rule]", "LightGray"}], ",", 
-               "\[IndentingNewLine]", 
-               RowBox[{"GaugeFaceStyle", "\[Rule]", "LightOrange"}]}], 
-              "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
-             RowBox[{"StringJoin", "[", 
-              RowBox[{
-               RowBox[{"ToString", "[", 
-                RowBox[{"Round", "[", "currentMemory", "]"}], "]"}], ",", 
-               "\"\< %\>\""}], "]"}]}], "\[IndentingNewLine]", "}"}], 
-           "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
-          RowBox[{"Style", "[", 
-           RowBox[{"\"\<Free memory used\>\"", ",", "Bold"}], "]"}], ",", 
-          "\[IndentingNewLine]", "Top"}], "\[IndentingNewLine]", "]"}]}], 
-       "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
-      "\[IndentingNewLine]", 
-      RowBox[{"UpdateInterval", "\[Rule]", "1"}], ",", "\[IndentingNewLine]", 
-      
+                 RowBox[{"0", ",", "100"}], "}"}], ",", "\[IndentingNewLine]", 
+                RowBox[{"ScaleRanges", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"50", ",", "60"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"60", ",", "70"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"70", ",", "80"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"80", ",", "100"}], "}"}]}], "}"}]}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"GaugeFrameStyle", "\[Rule]", "LightGray"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"GaugeFaceStyle", "\[Rule]", "LightOrange"}]}], 
+               "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"StringJoin", "[", 
+               RowBox[{
+                RowBox[{"ToString", "[", 
+                 RowBox[{"Round", "[", "currentMemory", "]"}], "]"}], ",", 
+                "\"\< %\>\""}], "]"}]}], "\[IndentingNewLine]", "}"}], 
+            "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<Free memory used\>\"", ",", "Bold"}], "]"}], ",", 
+           "\[IndentingNewLine]", "Top"}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+        RowBox[{"UpdateInterval", "\[Rule]", "1"}]}], "\[IndentingNewLine]", 
+       "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
       RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]",
       "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -313,21 +312,25 @@ Cell[BoxData[{
                  "\[IndentingNewLine]", "SpanFromLeft"}], 
                 "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", "}"}], 
               ",", "\[IndentingNewLine]", 
-              RowBox[{"Transpose", "[", 
-               RowBox[{"{", 
+              RowBox[{"Reverse", "[", 
+               RowBox[{"SortBy", "[", 
                 RowBox[{
-                 RowBox[{"Names", "[", "patt", "]"}], ",", 
-                 RowBox[{"Map", "[", 
-                  RowBox[{
+                 RowBox[{"Transpose", "[", 
+                  RowBox[{"{", 
                    RowBox[{
+                    RowBox[{"Names", "[", "patt", "]"}], ",", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
                     FractionBox[
                     RowBox[{"ByteCount", "[", "#", "]"}], 
                     RowBox[{"1024.", "^", "2."}]], "&"}], ",", 
-                   RowBox[{"Map", "[", 
+                    RowBox[{"Map", "[", 
                     RowBox[{"ToExpression", ",", 
                     RowBox[{"Names", "[", "patt", "]"}]}], "]"}]}], "]"}]}], 
-                "}"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], 
-           "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+                   "}"}], "]"}], ",", "Last"}], "]"}], "]"}]}], 
+             "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], 
+          ",", "\[IndentingNewLine]", 
           RowBox[{"Alignment", "\[Rule]", "Left"}], ",", 
           "\[IndentingNewLine]", 
           RowBox[{"Background", "\[Rule]", 
@@ -339,11 +342,10 @@ Cell[BoxData[{
           RowBox[{"FrameStyle", "\[Rule]", 
            RowBox[{"Directive", "[", "Gray", "]"}]}]}], "\[IndentingNewLine]",
           "]"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-       RowBox[{"UpdateInterval", "\[Rule]", "0.5"}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], 
-      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
+       RowBox[{"UpdateInterval", "\[Rule]", "1"}]}], "\[IndentingNewLine]", 
+      "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+     RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DeleteInstances", "[", 
@@ -613,11 +615,9 @@ level.\>\"", ",", "\[IndentingNewLine]",
         RowBox[{"\"\<Options\>\"", "\[Rule]", 
          RowBox[{"OptionsPanel", "[", "]"}]}]}], "}"}], "]"}], 
      "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-     RowBox[{"WindowTitle", "\[Rule]", "\"\<Memory Monitor\>\""}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Magnification", "\[Rule]", "1"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"DynamicUpdating", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
-    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+     RowBox[{"WindowTitle", "\[Rule]", "\"\<Memory Monitor\>\""}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"End", "[", "]"}], ";"}]}], "Input",
  CellChangeTimes->{{3.7049228972161007`*^9, 3.70492294658702*^9}, {
@@ -664,13 +664,17 @@ level.\>\"", ",", "\[IndentingNewLine]",
    3.726863421820489*^9}, {3.726863547227921*^9, 3.726863601439139*^9}, 
    3.726863726869177*^9, {3.726863758884544*^9, 3.7268637663860683`*^9}, {
    3.7268638829138536`*^9, 3.7268638860607224`*^9}, {3.7268640759962807`*^9, 
-   3.72686416739673*^9}},ExpressionUUID->"704928b7-cfe5-49f0-9839-\
-fc8e8785f51a"]
+   3.72686416739673*^9}, {3.726886682409937*^9, 3.7268866927905335`*^9}, {
+   3.726887347971122*^9, 3.7268873489872293`*^9}, {3.726887445011009*^9, 
+   3.726887450810382*^9}, {3.726887530023813*^9, 3.7268875574690437`*^9}, {
+   3.7268878743579245`*^9, 
+   3.7268878919908915`*^9}},ExpressionUUID->"6b2639bf-4f22-4a47-815f-\
+f8a9446306ea"]
 }, Open  ]]
 },
 WindowSize->{1440, 753},
 WindowMargins->{{33, Automatic}, {Automatic, 34}},
-FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
+FrontEndVersion->"11.2 para Microsoft Windows (64-bit) (September 10, 2017)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -685,12 +689,9 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 206, 4, 93, "Title", "ExpressionUUID" -> \
-"6d35e3b2-a1fd-4f48-b8e4-9ff9e2cb483e"],
-Cell[789, 28, 347, 9, 91, "Text", "ExpressionUUID" -> \
-"caf1b4e6-7fa7-47f7-ac4d-0e16443ca507"],
-Cell[1139, 39, 29212, 628, 5413, "Input", "ExpressionUUID" -> \
-"704928b7-cfe5-49f0-9839-fc8e8785f51a"]
+Cell[580, 22, 206, 4, 96, "Title",ExpressionUUID->"284c274b-1cb0-4292-95c3-bfc2bc18d2ad"],
+Cell[789, 28, 347, 9, 100, "Text",ExpressionUUID->"c36d8067-bb0e-4784-a650-b84676ea3703"],
+Cell[1139, 39, 29546, 632, 4540, "Input",ExpressionUUID->"6b2639bf-4f22-4a47-815f-f8a9446306ea"]
 }, Open  ]]
 }
 ]
