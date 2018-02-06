@@ -1,0 +1,698 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     30895,        690]
+NotebookOptionsPosition[     30367,        670]
+NotebookOutlinePosition[     30703,        685]
+CellTagsIndexPosition[     30660,        682]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Memory monitor", "Title",
+ CellChangeTimes->{{3.704924048958434*^9, 3.704924059237949*^9}, {
+  3.704924163877811*^9, 
+  3.704924165829454*^9}},ExpressionUUID->"6d35e3b2-a1fd-4f48-b8e4-\
+9ff9e2cb483e"],
+
+Cell["\<\
+Based on:
+https://mathematica.stackexchange.com/a/98303
+https://mathematica.stackexchange.com/a/70184
+https://mathematica.stackexchange.com/a/9753\
+\>", "Text",
+ CellChangeTimes->{{3.704924238516616*^9, 3.704924262354478*^9}, {
+  3.704926409034086*^9, 
+  3.7049264122243443`*^9}},ExpressionUUID->"caf1b4e6-7fa7-47f7-ac4d-\
+0e16443ca507"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Begin", "[", "\"\<MemoryUsagePalette`\>\"", "]"}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Show", " ", "free", " ", "available", " ", 
+     RowBox[{"memory", ".", " ", "For"}], " ", "versions"}], " ", "<", " ", 
+    RowBox[{"11.2", " ", "is", " ", "not", " ", "very", " ", 
+     RowBox[{"precise", "."}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"MemoryAvailableSafe", "[", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"$VersionNumber", " ", "<", " ", "11.2"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SystemInformation", "[", 
+      RowBox[{"\"\<Kernel\>\"", ",", "\"\<SystemMemory\>\""}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"MemoryAvailable", "[", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"UsedMemoryFunction", "[", "initialMemory_", "]"}], ":=", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"$VersionNumber", " ", "<", " ", "11.2"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"100", "*", 
+       RowBox[{"N", "[", 
+        RowBox[{"Ramp", "[", 
+         FractionBox[
+          RowBox[{"MemoryInUse", "[", "]"}], "initialMemory"], "]"}], "]"}]}],
+       ",", "\[IndentingNewLine]", 
+      RowBox[{"100", "*", 
+       RowBox[{"N", "[", 
+        RowBox[{"Ramp", "[", 
+         RowBox[{"1", "-", 
+          FractionBox[
+           RowBox[{"MemoryAvailable", "[", "]"}], "initialMemory"]}], "]"}], 
+        "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"FreeMemoryPercentage", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"DynamicModule", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"currentMemory", ",", 
+        RowBox[{"initialMemory", " ", "=", " ", 
+         RowBox[{"MemoryAvailableSafe", "[", "]"}]}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"currentMemory", " ", "=", " ", 
+         RowBox[{"UsedMemoryFunction", "[", "initialMemory", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Row", "[", "\[IndentingNewLine]", 
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"HorizontalGauge", "[", "\[IndentingNewLine]", 
+              RowBox[{"currentMemory", ",", "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", "100"}], "}"}], ",", "\[IndentingNewLine]", 
+               
+               RowBox[{"ScaleRanges", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"50", ",", "60"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"60", ",", "70"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"70", ",", "80"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"80", ",", "100"}], "}"}]}], "}"}]}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"GaugeFrameStyle", "\[Rule]", "LightGray"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"GaugeFaceStyle", "\[Rule]", "LightOrange"}]}], 
+              "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"StringJoin", "[", 
+              RowBox[{
+               RowBox[{"ToString", "[", 
+                RowBox[{"Round", "[", "currentMemory", "]"}], "]"}], ",", 
+               "\"\< %\>\""}], "]"}]}], "\[IndentingNewLine]", "}"}], 
+           "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<Free memory used\>\"", ",", "Bold"}], "]"}], ",", 
+          "\[IndentingNewLine]", "Top"}], "\[IndentingNewLine]", "]"}]}], 
+       "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"UpdateInterval", "\[Rule]", "1"}], ",", "\[IndentingNewLine]", 
+      
+      RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]",
+      "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{"MemoryPlot", ",", "HoldAll"}], "]"}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Memory", " ", "use", " ", 
+     RowBox[{"plot", ".", " ", "Takes"}], " ", "a", " ", 
+     RowBox[{"MemoryInUse", "[", "]"}]}], "-", 
+    RowBox[{"like", " ", "function", " ", "as", " ", 
+     RowBox[{"argument", "."}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MemoryPlot", "[", "memFunction_", "]"}], ":=", 
+    RowBox[{"DynamicModule", "[", 
+     RowBox[{
+      RowBox[{"{", "miu", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+       RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Labeled", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", 
+               RowBox[{
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  RowBox[{"miu", "[", 
+                   RowBox[{"[", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], ",", "2"}], "]"}], "]"}], ",", "Bold",
+                   ",", 
+                  RowBox[{
+                   RowBox[{"ColorData", "[", "\"\<HTML\>\"", "]"}], "[", 
+                   "\"\<FireBrick\>\"", "]"}]}], "]"}], ",", 
+                RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+                 RowBox[{"{", "miu", "}"}]}]}], "]"}], ",", 
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<Memory used [MiB]: \>\"", ",", "Bold"}], "]"}], 
+              ",", "Left"}], "]"}], "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"ListLinePlot", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"miu", "=", 
+                  RowBox[{"Append", "[", 
+                   RowBox[{
+                    RowBox[{"Drop", "[", 
+                    RowBox[{"miu", ",", "1"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"First", "[", 
+                    RowBox[{"Last", "[", "miu", "]"}], "]"}], "+", "1"}], ",", 
+                    FractionBox["memFunction", 
+                    RowBox[{"1024.", "^", "2."}]]}], "}"}]}], "]"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"FrameTicks", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"None", ",", "All"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"True", ",", "None"}], "}"}]}], "}"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"ImageSize", "\[Rule]", "300"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"FrameLabel", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<Time\>\"", ",", "\"\<Memory (MiB)\>\""}], 
+                   "}"}]}], ",", "\[IndentingNewLine]", 
+                 RowBox[{"PlotTheme", "\[Rule]", "\"\<Monochrome\>\""}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"PlotRange", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"All", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "All"}], "}"}]}], "}"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"PlotMarkers", "\[Rule]", "None"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], 
+                "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+                RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{"UpdateInterval", "\[Rule]", "1"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Initialization", "\[RuleDelayed]", 
+                RowBox[{"(", 
+                 RowBox[{"miu", "=", 
+                  RowBox[{"Transpose", "[", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Range", "[", "500", "]"}], ",", 
+                    RowBox[{"ConstantArray", "[", 
+                    RowBox[{
+                    FractionBox["memFunction", 
+                    RowBox[{"1024.", "^", "2."}]], ",", "500"}], "]"}]}], 
+                    "}"}], "]"}]}], ")"}]}]}], "\[IndentingNewLine]", "]"}], 
+             "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+             "SpanFromLeft"}], "\[IndentingNewLine]", "}"}]}], 
+          "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Alignment", "\[Rule]", "Left"}]}], "\[IndentingNewLine]", 
+        "]"}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]",
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Show", " ", "memory", " ", "consumption", " ", "of", " ", "every", " ", 
+    "symbol", " ", "defined", " ", "in", " ", 
+    RowBox[{"context", "."}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SymbolMemoryUsage", "[", "context_", "]"}], ":=", 
+   RowBox[{"DynamicModule", "[", 
+    RowBox[{
+     RowBox[{"{", "patt", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"patt", " ", "=", " ", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"context", ",", "\"\<*\>\""}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Join", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Item", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<Symbol\>\"", ",", "Bold", ",", "Black"}], 
+                  "]"}], ",", 
+                 RowBox[{"Background", "\[Rule]", "LightGray"}], ",", 
+                 RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Item", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<Memory (MiB)\>\"", ",", "Bold", ",", "Black"}],
+                   "]"}], ",", 
+                 RowBox[{"Background", "\[Rule]", "LightGray"}], ",", 
+                 RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}]}], 
+              "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", "}"}], ",",
+             "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Length", "[", 
+                RowBox[{"Names", "[", "patt", "]"}], "]"}], "\[Equal]", " ", 
+               "0"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"{", "\[IndentingNewLine]", 
+               RowBox[{"{", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Item", "[", 
+                  RowBox[{"\"\<No symbols defined\>\"", ",", 
+                   RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+                 "\[IndentingNewLine]", "SpanFromLeft"}], 
+                "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", "}"}], 
+              ",", "\[IndentingNewLine]", 
+              RowBox[{"Transpose", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Names", "[", "patt", "]"}], ",", 
+                 RowBox[{"Map", "[", 
+                  RowBox[{
+                   RowBox[{
+                    FractionBox[
+                    RowBox[{"ByteCount", "[", "#", "]"}], 
+                    RowBox[{"1024.", "^", "2."}]], "&"}], ",", 
+                   RowBox[{"Map", "[", 
+                    RowBox[{"ToExpression", ",", 
+                    RowBox[{"Names", "[", "patt", "]"}]}], "]"}]}], "]"}]}], 
+                "}"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+           "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Alignment", "\[Rule]", "Left"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Background", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", "LightYellow", "}"}], ",", "None"}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Frame", "\[Rule]", "All"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"FrameStyle", "\[Rule]", 
+           RowBox[{"Directive", "[", "Gray", "]"}]}]}], "\[IndentingNewLine]",
+          "]"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{"UpdateInterval", "\[Rule]", "0.5"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DeleteInstances", "[", 
+    RowBox[{"expr_", ",", "list_List"}], "]"}], ":=", 
+   RowBox[{"Select", "[", 
+    RowBox[{"expr", ",", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"MemberQ", "[", 
+        RowBox[{"list", ",", "#"}], "]"}]}], "&"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetContexts", "[", "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", "unused", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"unused", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<CloudObjectLoader`\>\"", ",", 
+         "\"\<IntegratedServicesLoader`\>\"", ",", "\"\<StreamingLoader`\>\"",
+          ",", "\"\<InterpreterLoader`\>\"", ",", "\"\<IconizeLoader`\>\"", 
+         ",", "\"\<HTTPHandlingLoader`\>\"", ",", 
+         "\"\<GeneralUtilitiesLoader`\>\"", ",", 
+         "\"\<AuthenticationLoader`\>\"", ",", "\"\<SystemTools`\>\"", ",", 
+         "\"\<PacletManager`\>\"", ",", "\"\<System`\>\""}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", 
+       RowBox[{"DeleteInstances", "[", 
+        RowBox[{"$ContextPath", ",", "unused"}], "]"}], "]"}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateSymbolMemoryUsagePanel", "[", "]"}], ":=", 
+    RowBox[{"DynamicModule", "[", 
+     RowBox[{
+      RowBox[{"{", "selection", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"selection", " ", "=", " ", 
+        RowBox[{"First", "[", 
+         RowBox[{"FirstPosition", "[", 
+          RowBox[{
+           RowBox[{"GetContexts", "[", "]"}], ",", "\"\<Global`\>\""}], "]"}],
+          "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+        RowBox[{"Column", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Row", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<Context: \>\"", ",", "Bold"}], "]"}], ",", 
+               RowBox[{"PopupView", "[", 
+                RowBox[{
+                 RowBox[{"GetContexts", "[", "]"}], ",", 
+                 RowBox[{"Dynamic", "[", "selection", "]"}]}], "]"}]}], "}"}],
+              "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Dynamic", "[", 
+             RowBox[{"SymbolMemoryUsage", "[", 
+              RowBox[{"Part", "[", 
+               RowBox[{
+                RowBox[{"GetContexts", "[", "]"}], ",", "selection"}], "]"}], 
+              "]"}], "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+          "\[IndentingNewLine]", "Center"}], "\[IndentingNewLine]", "]"}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]",
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Memory", " ", "protection"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"MemoryWatchdog", "[", 
+    RowBox[{"initialMemory_", ",", "limit_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", "currentMemory", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"currentMemory", " ", "=", " ", 
+       RowBox[{"UsedMemoryFunction", "[", "initialMemory", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"currentMemory", " ", ">", " ", "limit"}], ",", 
+        RowBox[{"Quit", "[", "]"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MemoryProtection", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"DynamicModule", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"protect", " ", "=", " ", "False"}], ",", 
+        RowBox[{"limit", "=", " ", "80"}], ",", 
+        RowBox[{"initialMemory", " ", "=", " ", 
+         RowBox[{"MemoryAvailableSafe", "[", "]"}]}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Refresh", "[", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{"protect", ",", 
+            RowBox[{"MemoryWatchdog", "[", 
+             RowBox[{"initialMemory", ",", "limit"}], "]"}]}], "]"}], ",", 
+          RowBox[{"UpdateInterval", "\[Rule]", "1"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"\"\<Protect memory: \>\"", ",", 
+              RowBox[{"Checkbox", "[", 
+               RowBox[{"Dynamic", "[", "protect", "]"}], "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"\"\<Used memory limit: \>\"", ",", 
+              RowBox[{"Slider", "[", 
+               RowBox[{
+                RowBox[{"Dynamic", "[", "limit", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"10", ",", "100", ",", "1"}], "}"}], ",", 
+                RowBox[{"Enabled", "\[Rule]", "protect"}]}], "]"}], ",", 
+              "limit"}], "}"}]}], "\[IndentingNewLine]", "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Alignment", "\[Rule]", "Left"}]}], "\[IndentingNewLine]", 
+         "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]",
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"History", " ", "length", " ", "panel"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"HistoryLengthButton", "[", "value_", "]"}], ":=", 
+    RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+     RowBox[{"Button", "[", "\[IndentingNewLine]", 
+      RowBox[{"value", ",", "\[IndentingNewLine]", 
+       RowBox[{"$HistoryLength", "=", "value"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Background", "\[Rule]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"$HistoryLength", "\[Equal]", "value"}], ",", "LightYellow",
+           ",", "Automatic"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"HistoryLengthPanel", "[", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"Map", "[", 
+        RowBox[{"HistoryLengthButton", ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1", ",", "2", ",", "3", ",", "Infinity"}], 
+          "}"}]}], "]"}], "\[IndentingNewLine]", "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Spacings", "\[Rule]", "1"}]}], "\[IndentingNewLine]", "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Main", " ", "panels"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"MemoryMonitorPanel", "[", "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+    RowBox[{"Row", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Column", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Item", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<Kernel memory\>\"", ",", "Bold"}], "]"}], ",", 
+              RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"MemoryPlot", "[", 
+             RowBox[{"MemoryInUse", "[", "]"}], "]"}], ",", 
+            "\[IndentingNewLine]", "\"\<\>\"", ",", "\[IndentingNewLine]", 
+            RowBox[{"Item", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<Frontend memory\>\"", ",", "Bold"}], "]"}], ",", 
+              RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"MemoryPlot", "[", 
+             RowBox[{"MemoryInUse", "[", "$FrontEnd", "]"}], "]"}]}], 
+           "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"BaselinePosition", "\[Rule]", "Top"}]}], 
+         "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Column", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Item", "[", 
+             RowBox[{
+              RowBox[{"FreeMemoryPercentage", "[", "]"}], ",", 
+              RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", "\"\<\>\"", ",", "\[IndentingNewLine]", 
+            RowBox[{"Item", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<Symbol memory usage\>\"", ",", "Bold"}], "]"}], 
+              ",", 
+              RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Item", "[", 
+             RowBox[{
+              RowBox[{"CreateSymbolMemoryUsagePanel", "[", "]"}], ",", 
+              RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}]}], 
+           "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"BaselinePosition", "\[Rule]", "Top"}]}], 
+         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Alignment", "\[Rule]", "Baseline"}]}], "\[IndentingNewLine]", 
+     "]"}], "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"OptionsPanel", "[", "]"}], ":=", 
+    RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+     RowBox[{"Column", "[", "\[IndentingNewLine]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<History length size\>\"", ",", "Bold"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        "\"\<By default, Mathematica saves all outputs in the \
+memory.\\nReducing history length size can improve memory usage.\>\"", ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"HistoryLengthPanel", "[", "]"}], ",", "\[IndentingNewLine]", 
+        "\"\<\>\"", ",", "\[IndentingNewLine]", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<Memory protection\>\"", ",", "Bold"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        "\"\<Abort kernel if free memory is used up to a specified \
+level.\>\"", ",", "\[IndentingNewLine]", 
+        RowBox[{"MemoryProtection", "[", "]"}]}], "\[IndentingNewLine]", 
+       "}"}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"CreatePalette", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"TabView", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"\"\<Memory monitor\>\"", "\[Rule]", 
+         RowBox[{"MemoryMonitorPanel", "[", "]"}]}], ",", 
+        RowBox[{"\"\<Options\>\"", "\[Rule]", 
+         RowBox[{"OptionsPanel", "[", "]"}]}]}], "}"}], "]"}], 
+     "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+     RowBox[{"WindowTitle", "\[Rule]", "\"\<Memory Monitor\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Magnification", "\[Rule]", "1"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"DynamicUpdating", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7049228972161007`*^9, 3.70492294658702*^9}, {
+   3.70492298334711*^9, 3.7049229887461042`*^9}, {3.704923214048523*^9, 
+   3.704923288411189*^9}, {3.704923428754266*^9, 3.7049234517695208`*^9}, {
+   3.704923538518402*^9, 3.704923582710677*^9}, {3.704923667582028*^9, 
+   3.7049236735092793`*^9}, {3.7049240787360563`*^9, 3.704924134585658*^9}, {
+   3.704926423732852*^9, 3.704926487277014*^9}, {3.7049269529937*^9, 
+   3.70492695320956*^9}, {3.704928188867762*^9, 3.704928189129497*^9}, {
+   3.704928248423964*^9, 3.704928300579976*^9}, {3.704928433031035*^9, 
+   3.704928435054308*^9}, {3.704928480767239*^9, 3.704928483190435*^9}, {
+   3.704928522943841*^9, 3.704928552164454*^9}, {3.704928588861095*^9, 
+   3.704928654733282*^9}, {3.704928723669589*^9, 3.7049287751156073`*^9}, {
+   3.704928831826398*^9, 3.704928834157586*^9}, {3.7049288675172043`*^9, 
+   3.7049288968572893`*^9}, {3.704928949931219*^9, 3.704928953907927*^9}, {
+   3.704928989521763*^9, 3.704928998983266*^9}, {3.704929137920732*^9, 
+   3.704929143040709*^9}, {3.726487667270687*^9, 3.726487920899186*^9}, {
+   3.72648802199034*^9, 3.726488094781538*^9}, {3.7267920216156816`*^9, 
+   3.72679206081878*^9}, {3.726792303281149*^9, 3.726792329721655*^9}, {
+   3.7267924595905333`*^9, 3.726792499440814*^9}, {3.726792533068469*^9, 
+   3.726792535180024*^9}, {3.726792953046871*^9, 3.726792955031618*^9}, {
+   3.726832011789687*^9, 3.7268320139569473`*^9}, 3.726832296043151*^9, {
+   3.726832884478072*^9, 3.726832889413021*^9}, {3.726832934351205*^9, 
+   3.7268329473078403`*^9}, {3.7268330017266912`*^9, 
+   3.7268330601582947`*^9}, {3.7268380640601673`*^9, 3.726838065000649*^9}, {
+   3.7268383567457247`*^9, 3.726838358656543*^9}, {3.726843303650045*^9, 
+   3.726843312169716*^9}, {3.726843367865591*^9, 3.7268433711764383`*^9}, {
+   3.7268435781844587`*^9, 3.726843593109729*^9}, {3.726844414001944*^9, 
+   3.7268444148034763`*^9}, {3.7268461007761927`*^9, 3.726846118954384*^9}, {
+   3.7268467615895367`*^9, 3.7268467861015253`*^9}, {3.726847057760874*^9, 
+   3.726847060010138*^9}, {3.726847215633148*^9, 3.726847218257482*^9}, {
+   3.726847253009706*^9, 3.7268472553147707`*^9}, {3.7268474597061033`*^9, 
+   3.726847503469344*^9}, {3.726847563758934*^9, 3.726847564240662*^9}, {
+   3.7268607407561007`*^9, 3.726860756805243*^9}, {3.726861716605133*^9, 
+   3.7268617305452013`*^9}, {3.72686180769974*^9, 3.7268618115760307`*^9}, {
+   3.726862208741663*^9, 3.726862212680027*^9}, {3.726862261668316*^9, 
+   3.726862318769926*^9}, {3.726862350722299*^9, 3.7268623568623323`*^9}, {
+   3.726862397562255*^9, 3.726862401359074*^9}, {3.7268624957490587`*^9, 
+   3.7268625098395367`*^9}, {3.726862552649708*^9, 3.7268626350649776`*^9}, 
+   3.726862733323262*^9, {3.726862905549958*^9, 3.726862910943943*^9}, {
+   3.726862955231423*^9, 3.726862958168445*^9}, {3.7268630041295557`*^9, 
+   3.7268630627365847`*^9}, {3.7268632051609087`*^9, 3.72686320788719*^9}, {
+   3.726863337929945*^9, 3.72686333830826*^9}, {3.7268633888580227`*^9, 
+   3.726863421820489*^9}, {3.726863547227921*^9, 3.726863601439139*^9}, 
+   3.726863726869177*^9, {3.726863758884544*^9, 3.7268637663860683`*^9}, {
+   3.7268638829138536`*^9, 3.7268638860607224`*^9}, {3.7268640759962807`*^9, 
+   3.72686416739673*^9}},ExpressionUUID->"704928b7-cfe5-49f0-9839-\
+fc8e8785f51a"]
+}, Open  ]]
+},
+WindowSize->{1440, 753},
+WindowMargins->{{33, Automatic}, {Automatic, 34}},
+FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 206, 4, 93, "Title", "ExpressionUUID" -> \
+"6d35e3b2-a1fd-4f48-b8e4-9ff9e2cb483e"],
+Cell[789, 28, 347, 9, 91, "Text", "ExpressionUUID" -> \
+"caf1b4e6-7fa7-47f7-ac4d-0e16443ca507"],
+Cell[1139, 39, 29212, 628, 5413, "Input", "ExpressionUUID" -> \
+"704928b7-cfe5-49f0-9839-fc8e8785f51a"]
+}, Open  ]]
+}
+]
+*)
+
