@@ -1,7 +1,7 @@
 # MemoryMonitor
 You are doing some calculations on a big matrix, it's going to take some time so you execute your algorithm and leave for a cofee break, only to find when you return that your computer it's totally stuck and unresponsive because that big ass matrix exceeded your RAM capacity by so far that half of your memory has been dumped to swap. This calls for a Stanlinist approach to control everything the kernel loads, keeps and feels.
 
-This package lets you monitor every symbol defined in multiple contexts and provides a memory watchdog to kill the kernel in case it grows wild.
+This package lets you monitor every symbol defined in multiple contexts and provides a memory watchdog to kill the kernel in case it grows out of your control and needs to be sent to the Gulag.
 
 ![monitor](https://github.com/CarlosManuelRodr/MemoryMonitor/raw/master/img/monitor.png)
 
